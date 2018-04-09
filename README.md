@@ -2,7 +2,7 @@
 
 `blockwise-dl` downloads websites in .zip format from the Blockwise management portal.
 
-This software is not production-read
+WARNING: This software is not production-ready.
 
 ### Dependencies
 
