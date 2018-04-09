@@ -29,8 +29,27 @@ All done!
 
 ### Usage
 
+Let blockwise-dl figure out how to download it.
+
 ```console
-$ python blockwise-dl.py <website-id>
+usage: blockwise-dl.py [-h] [-w WEBSITE] [--id ID] [--version]
+
+Downloads website .zip files from Blockwise.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -w WEBSITE, --website WEBSITE
+                        Attempts to figure out the website id from the given
+                        argument by itself and download it.
+  --id ID               download website using website ID explicity
+  --version             show program's version number and exit
+
+```
+
+Explicitly website ID:
+
+```console
+$ python blockwise-dl.py --id <website-id>
 ```
 
 ### TODO:
