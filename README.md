@@ -29,7 +29,9 @@ All done!
 
 ### Usage
 
-Let blockwise-dl figure out how to download it.
+By passing `-w WEBSITE` as an argument, `blockwise-dl` attempts to deduce the website ID itself from the argument.
+`WEBSITE` can currently be a link to the website inside Blockwise's back-end, e.g. `https://start.blockwi.se/websites/<id>/pages/`
+or simply the website ID. In the future it will also support deducing ID's by domain name.
 
 ```console
 usage: blockwise-dl.py [-h] [-w WEBSITE] [--id ID] [--version]
@@ -44,12 +46,6 @@ optional arguments:
   --id ID               download website using website ID explicity
   --version             show program's version number and exit
 
-```
-
-Explicitly website ID:
-
-```console
-$ python blockwise-dl.py --id <website-id>
 ```
 
 ### TODO:
