@@ -10,6 +10,7 @@ class downloader:
     """Object containing the Browser and the methods to login into Blockwise and download the website given website"""
     browser = mechanicalsoup.StatefulBrowser()
     config = None
+    website_list = []
 
     def __init__(self):
         """Constructor. Loads the config file and logs in the user."""
@@ -37,10 +38,66 @@ class downloader:
         response = self.browser.submit_selected()
         self.save_file(response)
 
+    def download_all(self):
+        """Downloads all websites from the configured account."""
+        # Fetch website list
+        self.fetch_website_list()
+
+        for website in self.website_list:
+            self.download(website['id'])
+
+    def fetch_website_list(self):
+        """Fetches the list of websites attached to the configured Blockwise account."""
+        # Clear list
+        self.website_list = []
+
+        # Open websites overview
+        self.browser.open(self.config["base_url"] + "websites")
+
+        # Find table and iterate over rows
+        for table_row in self.browser.get_current_page().select("table tr"):
+
+            # Fetch cells
+            cells = table_row.findAll('td')
+
+            # Iterate over cells
+            if(len(cells) > 0):
+
+                # Get website ID
+                website_id = table_row['data-id']
+                # Get website name
+                name = cells[1].text.strip()
+                # Get website domain name
+                domain = cells[2].text.strip()
+
+                # Build website object
+                website = {'id': website_id,
+                           'name': name, 'domain': domain}
+
+                # Add website object to list
+                self.website_list.append(website)
+
+    def get_website_id_by_domain(self, domain):
+        """Returns the website id for a given domain name."""
+
+        # Fetch website list
+        self.fetch_website_list()
+
+        # Loop through website list
+        for website in self.website_list:
+            if(domain == website['domain']):
+                return website['id']
+
     def list_websites(self):
-        """Returns a list of websites associated with this account"""
-        print("Listing websites... (NOT IMPLEMENTED YET)")
-        return
+        """Prints a list of websites associated with this account."""
+
+        # Fetch websites
+        self.fetch_website_list()
+
+        # Print website data
+        for website in self.website_list:
+            print("ID: {0} | Domain: {1} | Name: {2}".format(
+                website['id'], website['domain'], website['name']))
 
     def load_config(self):
         """Loads config.json from the same directory as this script."""

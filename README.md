@@ -29,21 +29,31 @@ All done!
 
 ### Usage
 
-By passing `-w WEBSITE` as an argument, `blockwise-dl` attempts to deduce the website ID itself from the argument.
-`WEBSITE` can currently be a link to the website inside Blockwise's back-end, e.g. `https://start.blockwi.se/websites/<id>/pages/`
-or simply the website ID. In the future it will also support deducing ID's by domain name.
+By passing `-w WEBSITE` as an argument, `blockwise-dl` attempts to deduce the website ID by itself.
+
+
+`WEBSITE` can currently be a domain name, link to the website inside Blockwise's back-end, e.g. `https://start.blockwi.se/websites/<id>/pages/` or the id.
+
+In the case that you have trouble with the `-w` flag, you can try being more explicit using the `-d` or `--id` flags.
+
 
 ```console
-usage: blockwise-dl.py [-h] [-w WEBSITE] [--id ID] [--version]
+usage: blockwise-dl.py [-h] [-w WEBSITE] [-d DOMAIN_NAME] [-all] [--id ID]
+                       [-l] [--version]
 
 Downloads website .zip files from Blockwise.
 
 optional arguments:
   -h, --help            show this help message and exit
   -w WEBSITE, --website WEBSITE
-                        Attempts to figure out the website id from the given
+                        Attempts to deduce the website id from the given
                         argument by itself and download it.
-  --id ID               download website using website ID explicity
+  -d DOMAIN_NAME, --domain-name DOMAIN_NAME
+                        download website using the domain name explicity.
+  -all, --download-all  download all websites associated with the configured
+                        credentials.
+  --id ID               download website using website ID explicity.
+  -l, --list            list websites available for download.
   --version             show program's version number and exit
 
 ```
@@ -51,10 +61,9 @@ optional arguments:
 ### TODO:
 
 * Add proper error/exception handling.
-* Refactoring
-* Add support for downloading sites by domain name rather than website ID.
+* Refactoring / clean up code.
 * Add support for interactively downloading websites, by displaying a menu of websites.
 
 ### Disclaimer
 
-I am in no shape or form associated with Blockwise. I can not be held responsible for any consequences resulting from usage of this software.
+I am in no shape or form associated with Blockwise. I can not be held responsible for any consequences resulting from usage of this software. I am not sure whether it breaches Blockwise's Terms of Service.
