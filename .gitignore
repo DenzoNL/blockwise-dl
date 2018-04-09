@@ -2,5 +2,6 @@ config.json
 blockwise-dl.spec
 build/
 dist/
+downloads/
 .vscode/
 __pycache__/

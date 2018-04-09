@@ -1,5 +1,6 @@
 {
-    "login_url": "https://start.blockwi.se/login/",
+    "base_url": "https://start.blockwi.se/",
+    "folder": "./downloads/",
     "email": "your@email.com",
     "password": "password"
 }
